@@ -6,7 +6,9 @@ from main import caluclate_errors
 
 def compare_files(file1, file2):
     df = pd.read_excel(file1, header=None, skipfooter=1)
+    df = df.dropna()
     df2 = pd.read_excel(file2, header=None, skipfooter=1)
+    df2 = df2.dropna()
     wrong_ids, total_difference = caluclate_errors(df, df2)
     return wrong_ids, total_difference
 
