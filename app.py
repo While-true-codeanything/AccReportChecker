@@ -5,8 +5,8 @@ from main import caluclate_errors
 
 
 def compare_files(file1, file2):
-    df = pd.read_excel(file1, header=None, skipfooter=1)
-    df2 = pd.read_excel(file2, header=None, skipfooter=1)
+    df = pd.read_excel(file1, header=None)
+    df2 = pd.read_excel(file2, header=None)
     if len(df.axes[1]) == 9:
         df = df[[1, 8]].rename(columns={1: 0, 8: 1})
     df = df.dropna()
@@ -26,7 +26,10 @@ file2 = st.sidebar.file_uploader("Выберите второй Excel файл",
 if st.sidebar.button("Сравнить"):
     if file1 is not None and file2 is not None:
         wrong_ids_res, total_difference_res = compare_files(file1, file2)
-        st.write(wrong_ids_res)
-        st.metric(label="Общая разница без учета знака", value=total_difference_res)
+        if len(wrong_ids_res) == 0:
+            st.text("Ошибок не найденно")
+        else:
+            st.write(wrong_ids_res)
+            st.metric(label="Общая разница без учета знака", value=total_difference_res)
     else:
         st.sidebar.warning("Пожалуйста, загрузите оба файла для сравнения.")
