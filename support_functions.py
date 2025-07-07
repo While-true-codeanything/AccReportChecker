@@ -7,7 +7,7 @@ import pandas as pd
 def parse_number(text):
     if not isinstance(text, str):
         text = str(text)
-    match = re.search(r'\b\d{7,8}\b', text)
+    match = re.search(r'\d{7,8}', text)
     if match:
         return int(match.group())
     else:
