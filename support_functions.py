@@ -5,12 +5,11 @@ import pandas as pd
 
 
 def parse_number(text):
-    if type(text) != str:
+    if not isinstance(text, str):
         text = str(text)
-    match = re.search(r'\d{7}', text)
+    match = re.search(r'\b\d{7,8}\b', text)
     if match:
-        number = match.group()
-        return int(number)
+        return int(match.group())
     else:
         print("Error. Not Found. Unsupported Format")
         print(text)
