@@ -12,7 +12,7 @@ def compare_files(file1, file2):
     df = df.dropna()
     if len(df2.axes[1]) == 9:
         df2 = df2[[1, 8]].rename(columns={1: 0, 8: 1})
-    df2 = df2.dropna()
+    df2 = df2.dropna(subset=df2.columns[:2])
     wrong_ids, total_difference = caluclate_errors(df, df2)
     return wrong_ids, total_difference
 

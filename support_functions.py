@@ -7,9 +7,11 @@ import pandas as pd
 def parse_number(text):
     if not isinstance(text, str):
         text = str(text)
-    match = re.search(r'\d{7,8}', text)
-    if match:
-        return int(match.group())
+
+    if re.search(r'\d{8}', text):
+        return int(re.search(r'\d{8}', text).group())
+    elif re.search(r'\d{7}', text):
+        return int(re.search(r'\d{7}', text).group())
     else:
         print("Error. Not Found. Unsupported Format")
         print(text)
