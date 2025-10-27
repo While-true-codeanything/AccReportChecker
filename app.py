@@ -9,7 +9,7 @@ def compare_files(file1, file2):
     df2 = pd.read_excel(file2, header=None)
     if len(df.axes[1]) == 9:
         df = df[[1, 8]].rename(columns={1: 0, 8: 1})
-    df = df.dropna()
+    df = df.dropna(subset=df.columns[:2])
     if len(df2.axes[1]) == 9:
         df2 = df2[[1, 8]].rename(columns={1: 0, 8: 1})
     df2 = df2.dropna(subset=df2.columns[:2])
